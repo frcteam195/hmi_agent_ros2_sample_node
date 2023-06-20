@@ -4,6 +4,11 @@ import sys
 
 import rclpy
 from hmi_agent_ros2_sample_node.generated.parameters import ParameterizedNode
+from ck_utilities_ros2_py_node.joystick import Joystick
+
+from dataclasses import dataclass
+import numpy as np
+
 
 from std_msgs.msg import String
 
@@ -11,6 +16,7 @@ from std_msgs.msg import String
 class LocalNode(ParameterizedNode):
     def __init__(self):
         super().__init__('hmi_agent_ros2_sample_node')
+        js = Joystick(0)
 
 def signal_handler(sig, frame):
     sys.exit(0)
