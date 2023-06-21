@@ -4,6 +4,7 @@ import rclpy.node
 import rclpy.parameter
 from dataclasses import dataclass
 from typing import List
+from ck_utilities_ros2_py_node.node_handle import NodeHandle
 
 @dataclass
 class parameters_t:
@@ -24,6 +25,7 @@ Parameters.{{param_name}} = node.get_parameter("{{param_name}}").get_parameter_v
 class ParameterizedNode(rclpy.node.Node):
     def __init__(self, node_name):
         super().__init__(node_name)
+        self.__node_handle_initializer = NodeHandle(self)
         self.Parameters = parameters_t()
         load_parameters(self, self.Parameters)
 
