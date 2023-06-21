@@ -3,6 +3,7 @@ import signal
 import sys
 
 import rclpy
+import rclpy.qos
 from ck_utilities_ros2_py_node.ckmath import *
 from hmi_agent_ros2_sample_node.generated.parameters import ParameterizedNode
 from ck_utilities_ros2_py_node.joystick import Joystick
@@ -34,7 +35,14 @@ class LocalNode(ParameterizedNode):
         self.odometry_subscriber = BufferedROSMsgHandlerPy(Odometry)
         self.odometry_subscriber.register_for_updates("odometry/filtered")
 
-        self.__joystick_subscriber = self.create_subscription(topic="/JoystickStatus", msg_type=JoystickStatus, callback=self.joystick_callback, qos_profile=1)
+        qos_profile = rclpy.qos.QoSProfile(
+            reliability=rclpy.qos.QoSReliabilityPolicy.BEST_EFFORT,
+            history=rclpy.qos.QoSHistoryPolicy.KEEP_LAST,
+            depth=1,
+            durability=rclpy.qos.QoSDurabilityPolicy.VOLATILE
+        )
+
+        self.__joystick_subscriber = self.create_subscription(topic="/JoystickStatus", msg_type=JoystickStatus, callback=self.joystick_callback, qos_profile=qos_profile)
 
         register_for_robot_updates()
 
