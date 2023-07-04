@@ -3,7 +3,7 @@ from template.render_jinja_py import render_jinja
 from pathlib import Path
 import os
 
-package_name = 'hmi_agent_ros2_sample_node'
+package_name = 'hmi_agent_ros2_node'
 
 base_path_str = str(Path(str(Path(__file__).resolve().parent) + '/'))
 template_path = Path(base_path_str + '/' + package_name + '/generated')
@@ -31,7 +31,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'hmi_agent_ros2_sample_node = hmi_agent_ros2_sample_node.hmi_agent_ros2_sample_node:main',
+            'hmi_agent_ros2_node = hmi_agent_ros2_node.hmi_agent_ros2_node:main',
         ],
     },
 )

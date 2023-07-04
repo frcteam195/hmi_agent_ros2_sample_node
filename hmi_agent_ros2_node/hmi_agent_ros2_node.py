@@ -5,7 +5,7 @@ import sys
 import rclpy
 import rclpy.qos
 from ck_utilities_ros2_py_node.ckmath import *
-from hmi_agent_ros2_sample_node.generated.parameters import ParameterizedNode
+from hmi_agent_ros2_node.generated.parameters import ParameterizedNode
 from ck_utilities_ros2_py_node.joystick import Joystick
 from frc_robot_utilities_ros2_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_ros2_py_node.BufferedROSMsgHandlerPy import BufferedROSMsgHandlerPy
@@ -23,7 +23,7 @@ from std_msgs.msg import String
 
 class LocalNode(ParameterizedNode):
     def __init__(self):
-        super().__init__('hmi_agent_ros2_sample_node')
+        super().__init__('hmi_agent_ros2_node')
         self.driver_joystick = Joystick(0)
         self.operator_button_box = Joystick(1)
         self.operator_joystick = Joystick(2)
